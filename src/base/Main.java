@@ -1,6 +1,7 @@
 package base;
 
 import gui.RoundBorder;
+import gui.controller.ControllerPasswordLengthChanged;
 import gui.windows.MainWindow;
 import gui.windows.WindowDesign;
 
@@ -19,6 +20,7 @@ public class Main {
         design.setTextFont(new Font("Arial" , Font.PLAIN, 11));
         design.setHeaderFont(new Font("Arial", 0, 16));
         MainWindow window = new MainWindow(design);
+        new ControllerPasswordLengthChanged(window);
         window.setVisible(true);
     }
 

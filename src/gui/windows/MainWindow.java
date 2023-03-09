@@ -1,6 +1,7 @@
 package gui.windows;
 
 import javax.swing.*;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 
 public class MainWindow extends JFrame {
@@ -10,7 +11,7 @@ public class MainWindow extends JFrame {
     private JPanel pnlPasswordView, pnlPasswordOptions;
     private JTextField tfPasswordView, tfSpecialChars;
     private JSlider sPasswordLength;
-    private JLabel lPasswordLengthDesc;
+    private JLabel lblPasswordLengthDesc;
 
     public MainWindow(WindowDesign design) throws HeadlessException {
         super("Password Generator");
@@ -44,26 +45,39 @@ public class MainWindow extends JFrame {
         tfPasswordView.setCaretColor(design.getCaretColor());
         tfPasswordView.setBorder(design.getBorder());
         tfPasswordView.setPreferredSize(new Dimension(300, 50));
-
         pnlPasswordView.add(tfPasswordView);
     }
 
     private void buildPasswordOptions() {
         pnlPasswordOptions = new JPanel();
 
-        lPasswordLengthDesc = new JLabel("Password Length: 0 Characters");
-        lPasswordLengthDesc.setFont(design.getHeaderFont());
-        lPasswordLengthDesc.setForeground(design.getHeaderColor());
-        lPasswordLengthDesc.setBackground(design.getBackgroundColor());
+        lblPasswordLengthDesc = new JLabel();
+        lblPasswordLengthDesc.setFont(design.getHeaderFont());
+        lblPasswordLengthDesc.setForeground(design.getHeaderColor());
+        lblPasswordLengthDesc.setBackground(design.getBackgroundColor());
+        updatePasswordLengthDesc(0);
 
-        sPasswordLength = new JSlider(1, 0, 200, 120);
+        sPasswordLength = new JSlider(0, 200, 120);
         sPasswordLength.setPreferredSize(new Dimension(200, 100));
         sPasswordLength.setBackground(design.getBackgroundComponents());
         sPasswordLength.setForeground(design.getTextColor());
         sPasswordLength.setBorder(design.getBorder());
 
-        pnlPasswordOptions.add(lPasswordLengthDesc);
+        pnlPasswordOptions.add(lblPasswordLengthDesc);
         pnlPasswordOptions.add(sPasswordLength);
     }
+    
+    public void addPasswordLengthChangeListener(ChangeListener listener) {
+        sPasswordLength.addChangeListener(listener);
+    }
+    
+    public void updatePasswordLengthDesc(int newValue) {
+        lblPasswordLengthDesc.setText("Password Length: " + newValue + " Characters");
+    }
+    public void updatePasswordLengthDesc() {
+        updatePasswordLengthDesc(getPasswordLength());
+    }
+
+    public int getPasswordLength() { return sPasswordLength.getValue(); }
 
 }
