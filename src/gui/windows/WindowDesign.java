@@ -3,6 +3,9 @@ package gui.windows;
 import javax.swing.border.Border;
 import java.awt.*;
 
+/**
+ * Class that holds some Design elements.
+ * */
 public class WindowDesign {
 
     private Color backgroundColor, backgroundComponents, headerColor, textColor, caretColor;

@@ -5,6 +5,14 @@ import gui.windows.MainWindow;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+/**
+ * Controller that's responsible for the Change of the Password Length<br>
+ *<br>
+ * Linked Views:<br>
+ * - {@link MainWindow} --> Contains the Password Length<br>
+ *<br>
+ * Required Models:<br>
+ * */
 public class ControllerPasswordLengthChanged {
 
     private MainWindow view;
@@ -24,5 +32,4 @@ public class ControllerPasswordLengthChanged {
             view.updatePasswordLengthDesc();
         }
     }
-
 }

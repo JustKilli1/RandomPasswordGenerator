@@ -20,12 +20,18 @@ public class MainWindow extends JFrame {
         build();
     }
 
+    /**
+     * Sets some Default Window Values
+     * */
     private void init() {
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         getContentPane().setLayout(new FlowLayout());
     }
 
+    /**
+     * Build the Window and all necessary Components that are needed to secure the base functionality of the window.
+     * */
     private void build() {
         buildPasswordView();
         buildPasswordOptions();
@@ -33,7 +39,10 @@ public class MainWindow extends JFrame {
         add(pnlPasswordView);
         add(pnlPasswordOptions);
     }
-
+    /**
+     * Builds the Password View Panel {@code pnlPasswordView}.
+     * This Panel holds all Components that can display the Generated Password.
+     * */
     private void buildPasswordView() {
         pnlPasswordView = new JPanel();
         pnlPasswordView.setBackground(design.getBackgroundColor());
@@ -48,6 +57,10 @@ public class MainWindow extends JFrame {
         pnlPasswordView.add(tfPasswordView);
     }
 
+    /**
+     * Builds the Password Options Panel {@code pnlPasswordOptions}.
+     * This Panel holds all Components that can be used to set up the Password Generator.
+     * */
     private void buildPasswordOptions() {
         pnlPasswordOptions = new JPanel();
 
@@ -66,11 +79,16 @@ public class MainWindow extends JFrame {
         pnlPasswordOptions.add(lblPasswordLengthDesc);
         pnlPasswordOptions.add(sPasswordLength);
     }
-    
+
     public void addPasswordLengthChangeListener(ChangeListener listener) {
         sPasswordLength.addChangeListener(listener);
     }
-    
+
+    /**
+    * Updates the Value of the Label {@code lblPasswordLengthDesc}.
+     * This Label displays the current selected Password Length.
+     * @param newValue The new Selected Password Length
+    * */
     public void updatePasswordLengthDesc(int newValue) {
         lblPasswordLengthDesc.setText("Password Length: " + newValue + " Characters");
     }
