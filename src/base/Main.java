@@ -25,10 +25,13 @@ public class Main {
         window.setVisible(true);*/
 
         GeneratorPassword generatorPassword = new GeneratorPassword(20, "$!/&§$%=?");
-        for(int i = 0; i < 100; i++) {
+        long before = System.currentTimeMillis();
+        for(int i = 0; i < 10000000; i++) {
             System.out.println(generatorPassword.generate());
         }
-
+        long after = System.currentTimeMillis();
+        long timeSec = (after - before) / 1000;
+        System.out.println("Execution Time: " + timeSec + " s");
     }
 
 }
