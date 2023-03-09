@@ -5,15 +5,16 @@ import java.awt.*;
 
 public class WindowDesign {
 
-    private Color backgroundColor, backgroundComponents, headerColor, textColor;
+    private Color backgroundColor, backgroundComponents, headerColor, textColor, caretColor;
     private Font headerFont, textFont;
     private Border border;
 
-    public WindowDesign(Color backgroundColor, Color backgroundComponents, Color headerColor, Color textColor, Font headerFont, Font textFont, Border border) {
+    public WindowDesign(Color backgroundColor, Color backgroundComponents, Color headerColor, Color textColor, Color caretColor, Font headerFont, Font textFont, Border border) {
         this.backgroundColor = backgroundColor;
         this.backgroundComponents = backgroundComponents;
         this.headerColor = headerColor;
         this.textColor = textColor;
+        this.caretColor = caretColor;
         this.headerFont = headerFont;
         this.textFont = textFont;
         this.border = border;
@@ -77,5 +78,13 @@ public class WindowDesign {
 
     public void setBorder(Border border) {
         this.border = border;
+    }
+
+    public Color getCaretColor() {
+        return caretColor;
+    }
+
+    public void setCaretColor(Color caretColor) {
+        this.caretColor = caretColor;
     }
 }
