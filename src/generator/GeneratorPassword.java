@@ -22,7 +22,15 @@ public class GeneratorPassword implements IGenerator<String> {
     @Override
     public String generate() {
         String password = "";
-        for(int i = 0; i < length; i++) password += randomChar();
+        for(int i = 0; i < length; i++) {
+            char randomChar = randomChar();
+            if(password.length() > 0) {
+                while(password.toCharArray()[password.length() - 1] == randomChar) {
+                    randomChar = randomChar();
+                }
+            }
+            password += randomChar;
+        }
         return password;
     }
 
