@@ -24,11 +24,12 @@ public class Main {
         new ControllerPasswordLengthChanged(window);
         window.setVisible(true);*/
 
-        GeneratorPassword generatorPassword = new GeneratorPassword(20, "$!/&§$%=?");
+        GeneratorPassword generatorPassword = new GeneratorPassword(20, "$!/&§$%=?", 100000000);
         long before = System.currentTimeMillis();
-        for(int i = 0; i < 10000000; i++) {
-            System.out.println(generatorPassword.generate());
-        }
+        generatorPassword.generate();
+/*        for(int i = 0; i < 10000000; i++) {
+           generatorPassword.generate();
+        }*/
         long after = System.currentTimeMillis();
         long timeSec = (after - before) / 1000;
         System.out.println("Execution Time: " + timeSec + " s");
