@@ -1,6 +1,5 @@
 package shared.performance;
 
-import javax.security.auth.callback.Callback;
 import java.util.concurrent.TimeUnit;
 
 public class PerformanceTestResult {
