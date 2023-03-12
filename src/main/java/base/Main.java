@@ -2,17 +2,23 @@ package base;
 
 import generator.GeneratorPassword;
 import gui.RoundBorder;
+import gui.controller.ControllerGeneratePassword;
 import gui.controller.ControllerPasswordLengthChanged;
 import gui.windows.MainWindow;
 import gui.windows.WindowDesign;
+import model.PasswordGeneratorModel;
 
 import java.awt.*;
 
 public class Main {
     public static void main(String[] args) {
         System.out.println("Hello world!");
+        PasswordGeneratorModel model = new PasswordGeneratorModel();
+        WindowDesign design = builDesign();
         MainWindow window = new MainWindow(design);
         new ControllerPasswordLengthChanged(window);
+        new ControllerGeneratePassword(model, window);
+
         window.setVisible(true);
     }
 
