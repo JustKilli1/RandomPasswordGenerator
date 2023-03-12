@@ -9,11 +9,11 @@ public class MainWindow extends JFrame {
 
     private WindowDesign design;
 
-    private JPanel pnlMain;
+    private JPanel pnlMain, pnlPasswordView, pnlPasswordLength, pnlSpecialCharacter;
     private JTextField tfPasswordView, tfSpecialChars;
     private JButton cmdGenerate;
     private JSlider sPasswordLength;
-    private JLabel lblPasswordLengthDesc;
+    private JLabel lblPasswordLengthDesc, lblSpecialCharsDesc, lblPaswordViewDesc;
 
     public MainWindow(WindowDesign design) throws HeadlessException {
         super("Password Generator");
@@ -47,12 +47,11 @@ public class MainWindow extends JFrame {
      * Builds the Password View Components.
      * */
     private void buildPasswordView() {
-
-        JLabel lblPWDesc = new JLabel("Password");
-        lblPWDesc.setFont(design.getTextFont());
-        lblPWDesc.setForeground(design.getTextColor());
-        lblPWDesc.setBackground(design.getBackgroundComponents());
-        lblPWDesc.setVerticalAlignment(SwingConstants.BOTTOM);
+        lblPaswordViewDesc = new JLabel("Password");
+        lblPaswordViewDesc.setFont(design.getTextFont());
+        lblPaswordViewDesc.setForeground(design.getTextColor());
+        lblPaswordViewDesc.setBackground(design.getBackgroundComponents());
+        lblPaswordViewDesc.setVerticalAlignment(SwingConstants.BOTTOM);
 
         tfPasswordView = new JTextField();
         tfPasswordView.setBackground(design.getBackgroundComponents());
@@ -62,12 +61,12 @@ public class MainWindow extends JFrame {
         tfPasswordView.setBorder(design.getBorder());
         tfPasswordView.setEditable(false);
 
-        JPanel pnlPV = new JPanel(new BorderLayout(0, 5));
-        pnlPV.add(lblPWDesc, BorderLayout.NORTH);
-        pnlPV.add(tfPasswordView, BorderLayout.CENTER);
-        pnlPV.setBackground(design.getBackgroundColor());
+        pnlPasswordView = new JPanel(new BorderLayout(0, 5));
+        pnlPasswordView.add(lblPaswordViewDesc, BorderLayout.NORTH);
+        pnlPasswordView.add(tfPasswordView, BorderLayout.CENTER);
+        pnlPasswordView.setBackground(design.getBackgroundColor());
 
-        pnlMain.add(pnlPV);
+        pnlMain.add(pnlPasswordView);
     }
 
     /**
@@ -87,11 +86,11 @@ public class MainWindow extends JFrame {
         sPasswordLength.setForeground(design.getTextColor());
         sPasswordLength.setBorder(design.getBorder());
 
-        JLabel lblSCDesc = new JLabel("Special Character");
-        lblSCDesc.setFont(design.getTextFont());
-        lblSCDesc.setForeground(design.getTextColor());
-        lblSCDesc.setBackground(design.getBackgroundComponents());
-        lblSCDesc.setVerticalAlignment(SwingConstants.BOTTOM);
+        lblSpecialCharsDesc = new JLabel("Special Character");
+        lblSpecialCharsDesc.setFont(design.getTextFont());
+        lblSpecialCharsDesc.setForeground(design.getTextColor());
+        lblSpecialCharsDesc.setBackground(design.getBackgroundComponents());
+        lblSpecialCharsDesc.setVerticalAlignment(SwingConstants.BOTTOM);
 
         tfSpecialChars = new JTextField();
         tfSpecialChars.setBackground(design.getBackgroundComponents());
@@ -107,18 +106,18 @@ public class MainWindow extends JFrame {
         cmdGenerate.setBorder(design.getBorder());
         cmdGenerate.setFont(design.getHeaderFont());
 
-        JPanel pnlPwLength = new JPanel(new BorderLayout(0, 5));
-        pnlPwLength.add(lblPasswordLengthDesc, BorderLayout.CENTER);
-        pnlPwLength.add(sPasswordLength, BorderLayout.SOUTH);
-        pnlPwLength.setBackground(design.getBackgroundColor());
+        pnlPasswordLength = new JPanel(new BorderLayout(0, 5));
+        pnlPasswordLength.add(lblPasswordLengthDesc, BorderLayout.CENTER);
+        pnlPasswordLength.add(sPasswordLength, BorderLayout.SOUTH);
+        pnlPasswordLength.setBackground(design.getBackgroundColor());
 
-        JPanel pnlSC = new JPanel(new BorderLayout(0, 5));
-        pnlSC.add(lblSCDesc, BorderLayout.CENTER);
-        pnlSC.add(tfSpecialChars, BorderLayout.SOUTH);
-        pnlSC.setBackground(design.getBackgroundColor());
+        pnlSpecialCharacter = new JPanel(new BorderLayout(0, 5));
+        pnlSpecialCharacter.add(lblSpecialCharsDesc, BorderLayout.CENTER);
+        pnlSpecialCharacter.add(tfSpecialChars, BorderLayout.SOUTH);
+        pnlSpecialCharacter.setBackground(design.getBackgroundColor());
 
-        pnlMain.add(pnlPwLength);
-        pnlMain.add(pnlSC);
+        pnlMain.add(pnlPasswordLength);
+        pnlMain.add(pnlSpecialCharacter);
         pnlMain.add(cmdGenerate);
     }
 
