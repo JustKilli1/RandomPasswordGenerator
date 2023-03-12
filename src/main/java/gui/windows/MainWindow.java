@@ -44,8 +44,7 @@ public class MainWindow extends JFrame {
         add(pnlMain);
     }
     /**
-     * Builds the Password View Panel {@code pnlPasswordView}.
-     * This Panel holds all Components that can display the Generated Password.
+     * Builds the Password View Components.
      * */
     private void buildPasswordView() {
 
@@ -72,8 +71,7 @@ public class MainWindow extends JFrame {
     }
 
     /**
-     * Builds the Password Options Panel {@code pnlPasswordOptions}.
-     * This Panel holds all Components that can be used to set up the Password Generator.
+     * Builds the Password Options Components.
      * */
     private void buildPasswordOptions() {
 

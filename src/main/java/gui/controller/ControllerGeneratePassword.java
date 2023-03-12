@@ -8,6 +8,15 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Controller that's responsible for Generating a new Random Password<br>
+ *<br>
+ * Linked Views:<br>
+ * - {@link MainWindow} --> Contains the Password Length and the SpecialChars needed for the Password Generation<br>
+ *<br>
+ * Required Models:<br>
+ * - {@link PasswordGeneratorModel} --> Generates a new Random Password<br>
+ * */
 public class ControllerGeneratePassword {
 
     private PasswordGeneratorModel model;
@@ -20,6 +29,9 @@ public class ControllerGeneratePassword {
         view.addGenerateBtnActionListener(new GeneratePasswordActionListener());
     }
 
+    /**
+     * ActionListener that generates a new Password and display it in the View
+     * */
     class GeneratePasswordActionListener implements ActionListener {
 
         @Override
