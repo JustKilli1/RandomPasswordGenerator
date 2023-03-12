@@ -3,13 +3,15 @@ package gui.windows;
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class MainWindow extends JFrame {
 
     private WindowDesign design;
 
-    private JPanel pnlPasswordView, pnlPasswordOptions;
+    private JPanel pnlMain;
     private JTextField tfPasswordView, tfSpecialChars;
+    private JButton cmdGenerate;
     private JSlider sPasswordLength;
     private JLabel lblPasswordLengthDesc;
 
@@ -24,28 +26,34 @@ public class MainWindow extends JFrame {
      * Sets some Default Window Values
      * */
     private void init() {
-        setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        setSize(500, 350);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        getContentPane().setLayout(new FlowLayout());
     }
 
     /**
      * Build the Window and all necessary Components that are needed to secure the base functionality of the window.
      * */
     private void build() {
+        pnlMain = new JPanel(new GridLayout(4, 1, 10, 20));
+        pnlMain.setBackground(design.getBackgroundColor());
+        pnlMain.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40));
+
         buildPasswordView();
         buildPasswordOptions();
 
-        add(pnlPasswordView);
-        add(pnlPasswordOptions);
+        add(pnlMain);
     }
     /**
      * Builds the Password View Panel {@code pnlPasswordView}.
      * This Panel holds all Components that can display the Generated Password.
      * */
     private void buildPasswordView() {
-        pnlPasswordView = new JPanel();
-        pnlPasswordView.setBackground(design.getBackgroundColor());
+
+        JLabel lblPWDesc = new JLabel("Password");
+        lblPWDesc.setFont(design.getTextFont());
+        lblPWDesc.setForeground(design.getTextColor());
+        lblPWDesc.setBackground(design.getBackgroundComponents());
+        lblPWDesc.setVerticalAlignment(SwingConstants.BOTTOM);
 
         tfPasswordView = new JTextField();
         tfPasswordView.setBackground(design.getBackgroundComponents());
@@ -53,8 +61,14 @@ public class MainWindow extends JFrame {
         tfPasswordView.setFont(design.getTextFont());
         tfPasswordView.setCaretColor(design.getCaretColor());
         tfPasswordView.setBorder(design.getBorder());
-        tfPasswordView.setPreferredSize(new Dimension(300, 50));
-        pnlPasswordView.add(tfPasswordView);
+        tfPasswordView.setEditable(false);
+
+        JPanel pnlPV = new JPanel(new BorderLayout(0, 5));
+        pnlPV.add(lblPWDesc, BorderLayout.NORTH);
+        pnlPV.add(tfPasswordView, BorderLayout.CENTER);
+        pnlPV.setBackground(design.getBackgroundColor());
+
+        pnlMain.add(pnlPV);
     }
 
     /**
@@ -62,22 +76,52 @@ public class MainWindow extends JFrame {
      * This Panel holds all Components that can be used to set up the Password Generator.
      * */
     private void buildPasswordOptions() {
-        pnlPasswordOptions = new JPanel();
 
         lblPasswordLengthDesc = new JLabel();
-        lblPasswordLengthDesc.setFont(design.getHeaderFont());
-        lblPasswordLengthDesc.setForeground(design.getHeaderColor());
-        lblPasswordLengthDesc.setBackground(design.getBackgroundColor());
-        updatePasswordLengthDesc(0);
+        lblPasswordLengthDesc.setFont(design.getTextFont());
+        lblPasswordLengthDesc.setForeground(design.getTextColor());
+        lblPasswordLengthDesc.setBackground(design.getBackgroundComponents());
+        lblPasswordLengthDesc.setVerticalAlignment(SwingConstants.BOTTOM);
+        updatePasswordLengthDesc(20);
 
-        sPasswordLength = new JSlider(0, 200, 120);
-        sPasswordLength.setPreferredSize(new Dimension(200, 100));
+        sPasswordLength = new JSlider(1, 200, 20);
         sPasswordLength.setBackground(design.getBackgroundComponents());
         sPasswordLength.setForeground(design.getTextColor());
         sPasswordLength.setBorder(design.getBorder());
 
-        pnlPasswordOptions.add(lblPasswordLengthDesc);
-        pnlPasswordOptions.add(sPasswordLength);
+        JLabel lblSCDesc = new JLabel("Special Character");
+        lblSCDesc.setFont(design.getTextFont());
+        lblSCDesc.setForeground(design.getTextColor());
+        lblSCDesc.setBackground(design.getBackgroundComponents());
+        lblSCDesc.setVerticalAlignment(SwingConstants.BOTTOM);
+
+        tfSpecialChars = new JTextField();
+        tfSpecialChars.setBackground(design.getBackgroundComponents());
+        tfSpecialChars.setForeground(design.getTextColor());
+        tfSpecialChars.setFont(design.getTextFont());
+        tfSpecialChars.setCaretColor(design.getCaretColor());
+        tfSpecialChars.setBorder(design.getBorder());
+        tfSpecialChars.setText("!\"§$%&/()=?`{[]}\\+*#',;.:-_<>|");
+
+        cmdGenerate = new JButton("Generate");
+        cmdGenerate.setBackground(design.getBackgroundComponents());
+        cmdGenerate.setForeground(design.getTextColor());
+        cmdGenerate.setBorder(design.getBorder());
+        cmdGenerate.setFont(design.getHeaderFont());
+
+        JPanel pnlPwLength = new JPanel(new BorderLayout(0, 5));
+        pnlPwLength.add(lblPasswordLengthDesc, BorderLayout.CENTER);
+        pnlPwLength.add(sPasswordLength, BorderLayout.SOUTH);
+        pnlPwLength.setBackground(design.getBackgroundColor());
+
+        JPanel pnlSC = new JPanel(new BorderLayout(0, 5));
+        pnlSC.add(lblSCDesc, BorderLayout.CENTER);
+        pnlSC.add(tfSpecialChars, BorderLayout.SOUTH);
+        pnlSC.setBackground(design.getBackgroundColor());
+
+        pnlMain.add(pnlPwLength);
+        pnlMain.add(pnlSC);
+        pnlMain.add(cmdGenerate);
     }
 
     public void addPasswordLengthChangeListener(ChangeListener listener) {
@@ -97,5 +141,13 @@ public class MainWindow extends JFrame {
     }
 
     public int getPasswordLength() { return sPasswordLength.getValue(); }
+
+    public String getSpecialChars() { return tfSpecialChars.getText(); }
+
+    public void addGenerateBtnActionListener(ActionListener listener) { cmdGenerate.addActionListener(listener); }
+
+    public void setGeneratedPassword(String password) {
+        tfPasswordView.setText(password);
+    }
 
 }
