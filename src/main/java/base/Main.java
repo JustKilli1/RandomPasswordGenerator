@@ -1,6 +1,5 @@
 package base;
 
-import generator.GeneratorPassword;
 import gui.RoundBorder;
 import gui.controller.ControllerGeneratePassword;
 import gui.controller.ControllerPasswordLengthChanged;

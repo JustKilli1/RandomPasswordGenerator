@@ -3,6 +3,8 @@ package gui.controller;
 import gui.windows.MainWindow;
 import model.PasswordGeneratorModel;
 
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -24,6 +26,7 @@ public class ControllerGeneratePassword {
         public void actionPerformed(ActionEvent event) {
             String password = model.generatePassword(view.getPasswordLength(), view.getSpecialChars());
             view.setGeneratedPassword(password);
+            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(password), null);
         }
     }
 
