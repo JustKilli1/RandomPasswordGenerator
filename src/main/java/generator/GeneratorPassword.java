@@ -4,8 +4,6 @@ import shared.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class GeneratorPassword implements IGenerator<String> {
@@ -13,19 +11,17 @@ public class GeneratorPassword implements IGenerator<String> {
     private int length;
     private char[] alphabet;
     private char[] specialChars;
-    private int generatePasswords;
     private List<String> passwords = new ArrayList<>();
 
-    public GeneratorPassword(int length, char[] specialChars, int generatePasswords) {
+    public GeneratorPassword(int length, char[] specialChars) {
         this.length = length;
         this.specialChars = specialChars;
-        this.generatePasswords = generatePasswords;
         alphabet = Utils.generateAlphabet(false);
 
     }
 
-    public GeneratorPassword(int length, String specialChars, int generatePasswords) {
-        this(length, specialChars.toCharArray(), generatePasswords);
+    public GeneratorPassword(int length, String specialChars) {
+        this(length, specialChars.toCharArray());
     }
 
     private void addNewPassword(String pw) {
@@ -35,30 +31,17 @@ public class GeneratorPassword implements IGenerator<String> {
 
     @Override
     public String generate() {
-        int threads = 10;
-        int generatePasswordsPerThread = generatePasswords / threads;
-        int extraPasswords = generatePasswords % threads;
-
-        ExecutorService executorService = Executors.newFixedThreadPool(threads);
-
-        for(int i = 0; i < threads; i++) {
-            executorService.execute(new Runnable() {
-                @Override
-                public void run() {
-                    for(int z = 0; z < generatePasswordsPerThread; z++) {
-                        String password = "";
-                        for(int i = 0; i < length; i++) {
-                            char randomChar = getRandomChar();
-                            while(password.length() > 0 && password.toCharArray()[password.length() - 1] == randomChar)
-                                randomChar = getRandomChar();
-                            password += randomChar;
-                        }
-                        addNewPassword(password);
-                    }
+        String password = "";
+        for(int i = 0; i < length; i++) {
+            char randomChar = getRandomChar();
+            if(password.length() > 0) {
+                while(password.toCharArray()[password.length() - 1] == randomChar) {
+                    randomChar = getRandomChar();
                 }
-            });
+            }
+            password += randomChar;
         }
-        return "";
+        return password;
     }
 
     /**

@@ -24,7 +24,7 @@ public class Main {
         new ControllerPasswordLengthChanged(window);
         window.setVisible(true);
 
-        GeneratorPassword generatorPassword = new GeneratorPassword(20, "$!/&§$%=?", 100000000);
+        GeneratorPassword generatorPassword = new GeneratorPassword(20, "$!/&§$%=?");
         long before = System.currentTimeMillis();
         generatorPassword.generate();
 /*        for(int i = 0; i < 10000000; i++) {
