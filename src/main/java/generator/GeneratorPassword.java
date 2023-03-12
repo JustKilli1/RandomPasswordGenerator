@@ -11,7 +11,6 @@ public class GeneratorPassword implements IGenerator<String> {
     private int length;
     private char[] alphabet;
     private char[] specialChars;
-    private List<String> passwords = new ArrayList<>();
 
     public GeneratorPassword(int length, char[] specialChars) {
         this.length = length;
@@ -22,11 +21,6 @@ public class GeneratorPassword implements IGenerator<String> {
 
     public GeneratorPassword(int length, String specialChars) {
         this(length, specialChars.toCharArray());
-    }
-
-    private void addNewPassword(String pw) {
-        System.out.println(pw);
-        passwords.add(pw);
     }
 
     @Override
